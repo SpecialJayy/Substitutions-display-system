@@ -1,17 +1,43 @@
+"use client"
+
+import {useEffect, useState} from "react";
+
 export default function Display() {
+    const [subs, setSubs] = useState([])
+
+    useEffect(() => {
+        fetch('/api')
+            .then(res => res.json())
+            .then(data => setSubs(data))
+            .catch(err => console.error(err))
+    }, []);
+
     return (
-        <main className="text-center pt-32 px-5">
-            <h1 className="text-4xl md:text-5xl font-bold mb-5">
-                Zastępstwa
-            </h1>
-            <p className="max-w-[750px] mx-auto leading-8">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Ad alias amet aut cupiditate deserunt explicabo illo illum ipsa,
-                itaque iusto molestiae,
-                natus odit quaerat quis,
-                sapiente voluptate voluptates!
-                Id, voluptatibus?
-            </p>
-        </main>
+        <div>
+            <h1>Zastępstwa</h1>
+            {subs.length !== 0 && <h2>{subs[0][1]}</h2>}
+            <table>
+            <thead>
+                <tr>
+                    <th>Lekcja</th>
+                    <th>Klasa</th>
+                    <th>Zastępca</th>
+                    <th>Przedmiot</th>
+                    <th>Sala</th>
+                </tr>
+                </thead>
+                <tbody>
+                {subs.length !== 0 && subs.map((elem) => (
+                    <tr key={elem[0]}>
+                        <td>{elem[1]}</td>
+                        <td>{elem[4]}</td>
+                        <td>{elem[7]}</td>
+                        <td>{elem[5]}</td>
+                        <td>{elem[6]}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
     )
 }
