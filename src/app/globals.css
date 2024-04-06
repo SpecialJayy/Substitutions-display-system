@@ -31,3 +31,27 @@ body {
     text-wrap: balance;
   }
 }
+
+.dropbox {
+  transition: background 0.2s;
+  height: 12vw;
+  width: 50vw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2vw;
+  border: rgb(68, 133, 253) 5px solid;
+  background-color: #14b1ff00;
+  border-radius:5px;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.dropbox-active {
+  transition: background 0.2s;
+  background-color: #14b1ff;
+}
+
+.dropbox:-moz-drag-over {
+  transition: background 0.2s;
+  background-color: #14b1ff;
+}
