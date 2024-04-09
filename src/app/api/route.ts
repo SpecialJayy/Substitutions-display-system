@@ -14,6 +14,7 @@ export async function GET() {
             const res: string[] = row.replace(/\t|<td>|<\/td>|\r/g, '@').split('@').filter(Boolean);
             res.unshift(date)
             res.unshift(i.toString())
+            res[2] = res[2].replace(',', ' |')
             if (res.length == 7) {
                 res.splice(6, 0, '')
             }
