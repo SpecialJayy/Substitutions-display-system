@@ -5,7 +5,6 @@ import {promises as fs} from "fs";
 export async function GET() {
     try {
         const file = await fs.readFile(process.cwd() + '/public/assets/raw.html', 'utf8');
-        console.log(file);
         const date = file.split('Okres: ')[1].substring(0, 10);
 
         const decoded: string[][] = [];
@@ -22,9 +21,13 @@ export async function GET() {
             decoded.push(res);
         })
 
-        console.log(decoded)
+        const groups: string[][][] = []
 
-        return new Response(JSON.stringify(decoded), {
+        for (let i = 0; i < decoded.length; i += 10) {
+            groups.push(decoded.slice(i, i + 10))
+        }
+
+        return new Response(JSON.stringify(groups), {
             headers: { "content-type": "application/json" },
             status: 200,
         })
