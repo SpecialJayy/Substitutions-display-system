@@ -13,6 +13,8 @@ export default function Display() {
             .catch(err => console.error(err))
     }, []);
 
+
+
     return (
         <div className="body">
              <div className="backGround">
@@ -28,7 +30,10 @@ export default function Display() {
                 />
                 <h1 className="header"><span className="headerText">Zastępstwa</span></h1>
                 {/* {subs.length !== 0 && <h2>{subs[0][1]}</h2>} */}
-                <div className="main">
+                <div className={`${ subs.length == 0 ? "" : "hidden"}`}>
+                    ni mo zastępstw
+                </div>
+                <div className={`main ${ subs.length == 0 ? "hidden" : ""}`}>
                     <span>
                     <p className="calendarTime">
                         <Image 
@@ -37,7 +42,9 @@ export default function Display() {
                             width={100}
                             alt="kalendarz"
                             className="tableIcon"/>
-                        08.04.2024
+                        {/* {subs[0][1] &&
+                        <span>{subs[0][1]}</span>
+                        } */}
                     </p>
                     <div className="rounded">
                         <table className="mainTable">
@@ -102,56 +109,37 @@ export default function Display() {
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
-                            <tr>
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
-                            <tr>
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
-                            <tr>
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
-                            <tr>
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
-                            <tr>
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
-                            <tr className="last">
-                                <td>0|7:15-8:00</td>
-                                <td>14Tp</td>
-                                <td>Marek Walica</td>
-                                <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
-                                <td className="last">303</td>
-                            </tr>
+                            {/* start map */}
+                            {subs.length != 0 && subs.map((elem) => { 
+                                return(
+                                    elem[0] == subs.length-1 ? (
+                                        <tr className="last">
+                                            <td>0|7:15-8:00</td>
+                                            <td>14Tp</td>
+                                            <td>Marek Walica</td>
+                                            <td>Zaj.prog.aplikacji internetowych i picia piwa na hołcynie</td>
+                                            <td className="last">303</td>
+                                        </tr>
+                                    ) : (
+                                        <tr key={elem[0]}>
+                                            <td>{elem[2]}</td>
+                                            <td>{elem[4]}</td>
+                                            <td>{elem[7]}</td>
+                                            <td>{elem[5]}</td>
+                                            <td className="last">{elem[6]}</td>
+                                        </tr> 
+                                    )
+                                )
+                            })}
+                            {/* end map */}
                         </tbody>
+
+                        { subs.map( (elem, index) => {
+                            return(
+                              elem[0] == subs.length &&
+                              <div className="whatever">Your Content</div>
+                            )
+                          })}
                     </table>
                     </div>
                     </span>
