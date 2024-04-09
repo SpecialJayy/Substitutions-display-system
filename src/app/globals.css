@@ -8,6 +8,7 @@
   --background-end-rgb: 255, 255, 255;
   --background: #4B4B4B;
   --border: #252525;
+  --background-variant: #747474;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -137,6 +138,8 @@ body {
   border-radius: 3vw;
   margin-left: auto;
   margin-right: auto;
+  min-width: 90vw;
+  max-height: 60vh;
 }
 
 table tr{
@@ -153,8 +156,8 @@ table td, table th{
 
 td{
   text-align: center;
-  font-size: 1.4vw;
-  padding: 0.2vw;
+  font-size: 1.55vw;
+  padding: 0.4vw;
 }
 
 .tableInfo{
@@ -168,4 +171,24 @@ td{
 .main {
 display: flex;
 justify-content: center;
+}
+
+table .klasa{
+}
+
+.gone{
+  visibility: hidden;
+}
+
+
+.noSubs {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background-color: var(--background);
+  padding: 5vw;
+  font-size: 4vw;
+  border: 0.5vw var(--border) solid;
+  border-radius: 4vw;
 }
