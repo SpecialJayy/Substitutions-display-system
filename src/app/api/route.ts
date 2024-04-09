@@ -5,7 +5,7 @@ import {promises as fs} from "fs";
 export async function GET() {
     try {
         const file = await fs.readFile(process.cwd() + '/public/assets/raw.html', 'utf8');
-
+        console.log(file);
         const date = file.split('Okres: ')[1].substring(0, 10);
 
         const decoded: string[][] = [];
@@ -15,6 +15,9 @@ export async function GET() {
             const res: string[] = row.replace(/\t|<td>|<\/td>|\r/g, '@').split('@').filter(Boolean);
             res.unshift(date)
             res.unshift(i.toString())
+            if (res.length == 7) {
+                res.splice(6, 0, '')
+            }
             i++
             decoded.push(res);
         })
