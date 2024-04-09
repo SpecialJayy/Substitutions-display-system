@@ -97,7 +97,6 @@ export default function DragAndDrop() {
                 onDragLeave={handleDragLeave}
                 onDragOver={handleDragOver}
             >
-                {/* this input element allows us to select files for upload. We make it hidden, so we can activate it when the user clicks select files */}
                 <input
                     placeholder="fileInput"
                     className="hidden"
