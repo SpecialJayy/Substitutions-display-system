@@ -25,7 +25,7 @@ export default function Display() {
 
     return (
         <div className="body">
-             <div className="backGround">
+            <div className="backGround">
                 <div className="transparency"></div>
             </div>
             <div className="foreGround">
@@ -38,10 +38,7 @@ export default function Display() {
                 />
                 <h1 className="header"><span className="headerText">Zastępstwa</span></h1>
                 {/* {subs.length !== 0 && <h2>{subs[0][1]}</h2>} */}
-                <div className={`${ subs[0][0].length == 0 ? "" : "hidden"}`}>
-                    nie ma zastępstw
-                </div>
-                <div className={`main ${ subs[0][0].length == 0 ? "hidden" : ""}`}>
+                <div className={`main ${ subs[0][0].length == 0 ? "gone" : ""}`}>
                     <span>
                     <p className="calendarTime">
                         <Image 
@@ -122,19 +119,19 @@ export default function Display() {
                                 return(
                                     index == subs[currentElementIndex].length-1 ? (
                                         <tr key={elem[0]} className="last">
-                                            <td>{elem[2]}</td>
-                                            <td>{elem[4]}</td>
-                                            <td>{elem[7]}</td>
-                                            <td>{elem[5]}</td>
-                                            <td className="last">{elem[6]}</td>
+                                             <td>{elem[2]}</td> {/* lekcja */}
+                                            <td className="klasa">{elem[4]}</td> {/* klasa */}
+                                            <td>{elem[7]}</td> {/* zastępca */}
+                                            <td>{elem[5]}</td> {/* przedmiot */}
+                                            <td className="last">{elem[6]}</td> {/* sala */}
                                         </tr>
                                     ) : (
                                         <tr key={elem[0]}>
-                                            <td>{elem[2]}</td>
-                                            <td>{elem[4]}</td>
-                                            <td>{elem[7]}</td>
-                                            <td>{elem[5]}</td>
-                                            <td className="last">{elem[6]}</td>
+                                            <td>{elem[2]}</td> {/* lekcja */}
+                                            <td className="klasa">{elem[4]}</td> {/* klasa */}
+                                            <td>{elem[7]}</td> {/* zastępca */}
+                                            <td>{elem[5]}</td> {/* przedmiot */}
+                                            <td className="last">{elem[6]}</td>  {/* sala */}
                                         </tr>
                                     )
                                 )
@@ -146,6 +143,9 @@ export default function Display() {
                     </span>
                 </div>
 
+            </div>
+            <div className={`noSubs ${ subs[0][0].length == 0 ? "" : "gone"}`}>
+                    Brak Zastępstw
             </div>
         </div>
     )
