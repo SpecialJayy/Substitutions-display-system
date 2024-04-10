@@ -40,22 +40,36 @@ export async function GET() {
 
 export async function POST(req: any) {
     const formData = await req.formData();
-    const file = formData.get("file");
-    if (!file) {
-        return NextResponse.json({ error: "No files received.", status: 400 });
+    const filename =  "raw.html";
+    if (formData.has("file")) {
+        const file = formData.get("file");
+        if (!file) {
+            return NextResponse.json({ error: "No files received.", status: 400 });
+        }
+
+        const buffer = Buffer.from(await file.arrayBuffer());
+        console.log(file.name);
+        try {
+            await fs.writeFile(
+                path.join(process.cwd(), "public/assets/" + filename),
+                buffer
+            );
+            return NextResponse.json({ message: "File successfully added", status: 201 });
+        } catch (error) {
+            console.log("Error occured ", error);
+            return NextResponse.json({ message: "Failed", status: 500 });
+        }
+    } else if (formData.has("delete")) {
+        try {
+            await fs.writeFile(
+                path.join(process.cwd(), "public/assets/" + filename),
+                ''
+            );
+            return NextResponse.json({ message: "File successfully deleted", status: 201 });
+        } catch (error) {
+            console.log("Error occured ", error);
+            return NextResponse.json({ message: "Failed", status: 500 });
+        }
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const filename =  "raw.html";
-    console.log(file.name);
-    try {
-        await fs.writeFile(
-            path.join(process.cwd(), "public/assets/" + filename),
-            buffer
-        );
-        return NextResponse.json({ message: "Success", status: 201 });
-    } catch (error) {
-        console.log("Error occured ", error);
-        return NextResponse.json({ message: "Failed", status: 500 });
-    }
 }
