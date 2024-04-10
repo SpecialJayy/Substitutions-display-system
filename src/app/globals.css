@@ -166,6 +166,50 @@ td{
 }
 
 .main {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.h-10vh {
+  height: 10vh;
+}
+
+.h-90vh {
+  height: 90vh;
+}
+
+.file-form {
+  border: solid var(--border);
+  border-width: 0.25vw;
+  border-radius: 1vw;
+  background-color: var(--background);
+}
+
+.bg-color {
+  background-color: var(--background);
+}
+
+.bg-color-light {
+  background-color: #D0D0D0;
+}
+
+.btn {
+  background-color: #FF9900FF;
+}
+
+.btn:hover {
+  background-color: #FFB444FF;
+}
+
+.rotate {
+  animation: rotation 0.75s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
