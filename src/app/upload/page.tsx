@@ -33,21 +33,20 @@ export default function DragAndDrop() {
             e.preventDefault()
             const formData = new FormData();
             formData.append("file", files[0]);
+            setLoadingIcon('spinner.svg')
+            setLoading(true)
             fetch("/api", {
                 method: "POST", body: formData,
             })
-                .then(response => response.json())
-                .then(data => console.log(data.message))
+                .then(async response => {
+                    console.log(await response.json())
+                    setLoadingIcon('check.png')
+                    const timeout = setTimeout(() => {
+                        setLoading(false)
+                    }, 300)
+                    return () => clearTimeout(timeout)
+                })
                 .catch(error => console.error(error.error));
-            setLoading(true)
-            const timeout = setTimeout(() => {
-                setLoadingIcon('check.png')
-                setTimeout(() => {
-                    setLoading(false)
-                    setLoadingIcon('spinner.svg')
-                }, 400)
-            }, 600);
-            return () => clearTimeout(timeout);
         }
     }
 
@@ -100,21 +99,20 @@ export default function DragAndDrop() {
     function deleteFile() {
         const formData = new FormData();
         formData.append("delete", "delete");
+        setLoadingIcon('spinner.svg')
+        setLoading(true)
         fetch("/api", {
             method: "POST", body: formData,
         })
-            .then(response => response.json())
-            .then(data => console.log(data.message))
+            .then(async response => {
+                console.log(await response.json())
+                setLoadingIcon('check.png')
+                const timeout = setTimeout(() => {
+                    setLoading(false)
+                }, 300)
+                return () => clearTimeout(timeout)
+            })
             .catch(error => console.error(error.error));
-        setLoading(true)
-        const timeout = setTimeout(() => {
-            setLoadingIcon('check.png')
-            setTimeout(() => {
-                setLoading(false)
-                setLoadingIcon('spinner.svg')
-            }, 400)
-        }, 600);
-        return () => clearTimeout(timeout);
     }
 
     return (

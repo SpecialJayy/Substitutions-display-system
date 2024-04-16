@@ -41,6 +41,7 @@ export async function GET() {
 export async function POST(req: any) {
     const formData = await req.formData();
     const filename =  "raw.html";
+    await new Promise((resolve) => setTimeout(resolve, 100));
     if (formData.has("file")) {
         const file = formData.get("file");
         if (!file) {
