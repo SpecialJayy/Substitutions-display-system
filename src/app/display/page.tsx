@@ -65,7 +65,7 @@ export default function Display() {
                                 {absent.length != 0 && absent.map((teacher: any) => (
                                     <p
                                         key={teacher}
-                                        className={`${ teacher === currentTeacher ? "font-bold" : ""}`}
+                                        className={`${ teacher === currentTeacher ? "bold" : ""}`}
                                     >
                                         {teacher}&nbsp;&nbsp;
                                     </p>
