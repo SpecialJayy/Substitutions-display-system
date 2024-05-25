@@ -40,17 +40,35 @@ export default function Display() {
                 {/* {subs.length !== 0 && <h2>{subs[0][1]}</h2>} */}
                 <div className={`main ${ subs[0][0].length == 0 ? "gone" : ""}`}>
                     <span>
-                    <p className="calendarTime">
-                        <Image 
-                            src={`/images/calendar.png`}
-                            height={100}
-                            width={100}
-                            alt="kalendarz"
-                            className="tableIcon"/>
-                        {subs[currentElementIndex] &&
-                        <span>{subs[currentElementIndex][0][1]}</span>
-                        }
-                    </p>
+                        <div className="topInfo">
+                            <p className="calendarTime">
+                                <Image
+                                    src={`/images/calendar.png`}
+                                    height={100}
+                                    width={100}
+                                    alt="kalendarz"
+                                    className="tableIcon"/>
+                                {subs[currentElementIndex] &&
+                                <span>{subs[currentElementIndex][0][1]}</span>
+                                }
+                            </p>
+                            <p className="absentTeachers">
+                                <p>George Negroid&nbsp;&nbsp;</p>
+                                <p>Marek Walica&nbsp;&nbsp;</p>
+                                <p>Janusz Pawlak&nbsp;&nbsp;</p>
+                                <p>Draiusz Olszar&nbsp;&nbsp;</p>
+                                <p>Anna Lechrich&nbsp;&nbsp;</p>
+                                <p>Małgorzata Borski&nbsp;&nbsp;</p>
+                                <p>Agnieszka Ptak&nbsp;&nbsp;</p>
+                                <p>Adrian Pytel&nbsp;&nbsp;</p>
+                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
+                                <p>Adrian Pytel&nbsp;&nbsp;</p>
+                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
+                                <p>Adrian Pytel&nbsp;&nbsp;</p>
+                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
+                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
+                            </p>
+                        </div>
                     <div className="rounded">
                         <table className="mainTable">
                     <thead>
@@ -79,35 +97,35 @@ export default function Display() {
 
                                 </th>
                             <th>
-                                <p className="tableInfo">
+                                 <p className="tableInfo">
                                     <Image
-                                    src={`/images/person.png`}
-                                    height={100}
-                                    width={100}
-                                    alt="zegar"
-                                    className="tableIcon"/>
-                                    Zastępca
+                                        src={`/images/book.png`}
+                                        height={100}
+                                        width={100}
+                                        alt="zegar"
+                                        className="tableIcon"/>
+                                    Przedmiot
                                 </p>
                             </th>
                             <th>
                                 <p className="tableInfo">
                                     <Image
-                                    src={`/images/book.png`}
-                                    height={100}
-                                    width={100}
-                                    alt="zegar"
-                                    className="tableIcon"/>
-                                    Przedmiot
+                                        src={`/images/person.png`}
+                                        height={100}
+                                        width={100}
+                                        alt="zegar"
+                                        className="tableIcon"/>
+                                    Zastępca
                                 </p>
                             </th>
                             <th className="last">
                                 <p className="tableInfo">
                                     <Image
-                                    src={`/images/building.png`}
-                                    height={100}
-                                    width={100}
-                                    alt="zegar"
-                                    className="tableIcon"/>
+                                        src={`/images/building.png`}
+                                        height={100}
+                                        width={100}
+                                        alt="zegar"
+                                        className="tableIcon"/>
                                     Sala
                                 </p>
                             </th>
@@ -121,16 +139,16 @@ export default function Display() {
                                         <tr key={elem[0]} className="last">
                                              <td>{elem[2]}</td> {/* lekcja */}
                                             <td className="klasa">{elem[4]}</td> {/* klasa */}
-                                            <td>{elem[7]}</td> {/* zastępca */}
                                             <td>{elem[5]}</td> {/* przedmiot */}
+                                            <td>{elem[7]}</td> {/* zastępca */}
                                             <td className="last">{elem[6]}</td> {/* sala */}
                                         </tr>
                                     ) : (
                                         <tr key={elem[0]}>
                                             <td>{elem[2]}</td> {/* lekcja */}
                                             <td className="klasa">{elem[4]}</td> {/* klasa */}
-                                            <td>{elem[7]}</td> {/* zastępca */}
                                             <td>{elem[5]}</td> {/* przedmiot */}
+                                            <td>{elem[7]}</td> {/* zastępca */}
                                             <td className="last">{elem[6]}</td>  {/* sala */}
                                         </tr>
                                     )
