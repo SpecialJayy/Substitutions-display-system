@@ -22,18 +22,42 @@ export async function GET() {
             decoded.push(res);
         })
 
-        const groups: string[][][] = []
+        const groups: string[][][] = [];
 
-        for (let i = 0; i < decoded.length; i += 10) {
-            groups.push(decoded.slice(i, i + 10))
-        }
+        let absent: string[] = [];
 
-        return new Response(JSON.stringify(groups), {
+        decoded.forEach(row => {
+            absent.push(row[3]);
+        })
+
+        absent = Array.from(new Set(absent));
+        absent = absent.sort();
+
+        absent.forEach(teacher => {
+            const temp: string[][] = [];
+            decoded.forEach(sub => {
+                if (teacher === sub[3]) {
+                    temp.push(sub);
+                }
+            })
+            if (temp.length > 10) {
+                for (let i = 0; i < temp.length; i += 10) {
+                    groups.push(temp.slice(i, i + 10));
+                }
+            } else {
+                groups.push(temp);
+            }
+        })
+
+
+        const toReturn = {absent, groups};
+
+        return new Response(JSON.stringify(toReturn), {
             headers: { "content-type": "application/json" },
             status: 200,
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 
 }
@@ -49,7 +73,6 @@ export async function POST(req: any) {
         }
 
         const buffer = Buffer.from(await file.arrayBuffer());
-        console.log(file.name);
         try {
             await fs.writeFile(
                 path.join(process.cwd(), "public/assets/" + filename),
@@ -57,7 +80,7 @@ export async function POST(req: any) {
             );
             return NextResponse.json({ message: "File successfully added", status: 201 });
         } catch (error) {
-            console.log("Error occured ", error);
+            console.error("Error occured ", error);
             return NextResponse.json({ message: "Failed", status: 500 });
         }
     } else if (formData.has("delete")) {
@@ -68,7 +91,7 @@ export async function POST(req: any) {
             );
             return NextResponse.json({ message: "File successfully deleted", status: 201 });
         } catch (error) {
-            console.log("Error occured ", error);
+            console.error("Error occured ", error);
             return NextResponse.json({ message: "Failed", status: 500 });
         }
     }

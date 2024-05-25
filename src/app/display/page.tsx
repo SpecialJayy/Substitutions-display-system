@@ -4,12 +4,18 @@ import {useState, useEffect} from "react";
 import Image from "next/image"
 
 export default function Display() {
-    const [subs, setSubs] = useState([[[]]])
+    const [subs, setSubs] = useState([[[]]]);
+    const [absent, setAbsent] = useState([]);
+    const [currentTeacher, setCurrentTeacher] = useState("");
 
     useEffect(() => {
         fetch('/api')
             .then(res => res.json())
-            .then(data => setSubs(data))
+            .then(data => {
+                setSubs(data.groups);
+                setAbsent(data.absent);
+                setCurrentTeacher(data.absent[0]);
+            })
             .catch(err => console.error(err))
     }, []);
 
@@ -17,11 +23,14 @@ export default function Display() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentElementIndex(prevIndex => (prevIndex + 1) % subs.length);
+            let temp = currentElementIndex;
+            temp = (temp + 1) % subs.length;
+            setCurrentElementIndex(temp);
+            setCurrentTeacher(subs[temp][0][3]);
         }, 4000)
 
         return () => clearInterval(interval)
-    }, [subs]);
+    }, [currentElementIndex, subs]);
 
     return (
         <div className="body">
@@ -53,20 +62,14 @@ export default function Display() {
                                 }
                             </p>
                             <p className="absentTeachers">
-                                <p>George Negroid&nbsp;&nbsp;</p>
-                                <p>Marek Walica&nbsp;&nbsp;</p>
-                                <p>Janusz Pawlak&nbsp;&nbsp;</p>
-                                <p>Draiusz Olszar&nbsp;&nbsp;</p>
-                                <p>Anna Lechrich&nbsp;&nbsp;</p>
-                                <p>Małgorzata Borski&nbsp;&nbsp;</p>
-                                <p>Agnieszka Ptak&nbsp;&nbsp;</p>
-                                <p>Adrian Pytel&nbsp;&nbsp;</p>
-                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
-                                <p>Adrian Pytel&nbsp;&nbsp;</p>
-                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
-                                <p>Adrian Pytel&nbsp;&nbsp;</p>
-                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
-                                <p>Ireneusz Buchcik&nbsp;&nbsp;</p>
+                                {absent.length != 0 && absent.map((teacher: any) => (
+                                    <p
+                                        key={teacher}
+                                        className={`${ teacher === currentTeacher ? "font-bold" : ""}`}
+                                    >
+                                        {teacher}&nbsp;&nbsp;
+                                    </p>
+                                ))}
                             </p>
                         </div>
                     <div className="rounded">

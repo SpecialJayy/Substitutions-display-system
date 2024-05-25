@@ -12,14 +12,12 @@ export default function DragAndDrop() {
 
     function handleChange(e: any) {
         e.preventDefault();
-        console.log("File has been added");
         if (e.target.files && e.target.files[0]) {
-            console.log(e.target.files);
             for (let i = 0; i < e.target.files["length"]; i++) {
                 if (e.target.files[i].name.includes(".html")) {
                     setFiles([e.target.files[i]]);
                 } else {
-                    console.log("zły typ pliku")
+                    console.error("zły typ pliku")
                 }
             }
         }
@@ -29,7 +27,6 @@ export default function DragAndDrop() {
         if (files.length === 0) {
             // no file has been submitted
         } else {
-            console.log(files[0])
             e.preventDefault()
             const formData = new FormData();
             formData.append("file", files[0]);
@@ -39,7 +36,6 @@ export default function DragAndDrop() {
                 method: "POST", body: formData,
             })
                 .then(async response => {
-                    console.log(await response.json())
                     setLoadingIcon('check.png')
                     const timeout = setTimeout(() => {
                         setLoading(false)
@@ -58,9 +54,8 @@ export default function DragAndDrop() {
             for (let i = 0; i < e.dataTransfer.files["length"]; i++) {
                 if (e.dataTransfer.files[i].name.includes(".html")) {
                     setFiles([e.dataTransfer.files[i]]);
-                    console.log(files)
                 } else {
-                    console.log("zły typ pliku")
+                    console.error("zły typ pliku")
                 }
             }
         }
@@ -105,7 +100,6 @@ export default function DragAndDrop() {
             method: "POST", body: formData,
         })
             .then(async response => {
-                console.log(await response.json())
                 setLoadingIcon('check.png')
                 const timeout = setTimeout(() => {
                     setLoading(false)
